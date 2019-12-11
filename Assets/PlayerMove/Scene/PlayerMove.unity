@@ -152,8 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87616ab9694fb3f42b696668609c6bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _velocity: {x: 0, y: 0, z: 0}
-  _moveSpeed: 0.1
   _rb: {fileID: 1158625918}
 --- !u!4 &1158625917 stripped
 Transform:
@@ -176,7 +174,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!1 &1212710987
 GameObject:
   m_ObjectHideFlags: 0

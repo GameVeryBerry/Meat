@@ -9,15 +9,15 @@ public class PlayerController : MonoBehaviour
     //変更前のステート名
     private string _beforeStateName;
     // 移動方向
-    [SerializeField]
+    
     private Vector3 _velocity;
     // 移動速度                           
     [SerializeField]
-    private float _moveSpeed = 0.1f;
+    private const float MOVE_SPEED = 0.3f;
     [SerializeField]
-    private const float RESEET_SPEED = 0.0f;
+    public const float RESEET_SPEED = 0.0f;
     [SerializeField]
-    private const float JUMP_POWER = 1.0f;
+    public const float JUMP_POWER = 3.0f;
     //リジットボディー
     [SerializeField]
     private Rigidbody _rb;
@@ -51,11 +51,10 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        
-            StateProcessor.Execute();
-        //Debug.Log(_velocity);
-
-        _rb.AddForce(_velocity);
+        Debug.Log(_isGround);
+        Debug.Log(_velocity);
+        StateProcessor.Execute();
+        _rb.AddForce(_velocity,ForceMode.Impulse);
     }
 
     public void Default()
@@ -71,28 +70,28 @@ public class PlayerController : MonoBehaviour
             _velocity.y = RESEET_SPEED;
             if (Input.GetKey(KeyCode.W))
             {
-                _velocity.z += _moveSpeed;
+                _velocity.z = MOVE_SPEED;
                 StateProcessor.State = Run;
             }
             if (Input.GetKey(KeyCode.A))
             {
-                _velocity.x -= _moveSpeed;
+                _velocity.x = -MOVE_SPEED;
                 StateProcessor.State = Run;
             }
             if (Input.GetKey(KeyCode.S))
             {
-                _velocity.z -= _moveSpeed;
+                _velocity.z = -MOVE_SPEED;
                 StateProcessor.State = Run;
             }
             if (Input.GetKey(KeyCode.D))
             {
-                _velocity.x += _moveSpeed;
+                _velocity.x = MOVE_SPEED;
                 StateProcessor.State = Run;
             }
 
             if (Input.GetKey(KeyCode.Space))
             {
-                _velocity.y += JUMP_POWER;
+                _velocity.y = JUMP_POWER;
                 StateProcessor.State = Jump;
             }
         }
@@ -125,7 +124,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKey(KeyCode.Space))
             {
-                _velocity.y += JUMP_POWER;
+                _velocity.y = JUMP_POWER;
                 StateProcessor.State = Jump;
             }
         
@@ -139,6 +138,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            _velocity = Vector3.zero;
             StateProcessor.State = Stand;
         }
     }
