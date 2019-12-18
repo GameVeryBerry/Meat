@@ -4,36 +4,31 @@ using UnityEngine;
 
 public class TPSCamera : MonoBehaviour
 {
-    // 注視対象プレイヤー
     [SerializeField]
-    private Transform player;
-    // 注視対象プレイヤーからカメラを離す距離
+    Transform _player;
     [SerializeField]
-    private float distance = 15.0f;
-    // カメラの垂直回転(見下ろし回転)
-    [SerializeField]
-    private Quaternion vRotation;
-    // カメラの水平回転  
-    [SerializeField]
-    public Quaternion hRotation;     
+    float _rotateSpeed;
 
+    float _yaw, _pitch;
+    Vector3 _distance;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        // 回転の初期化
-        vRotation = Quaternion.Euler(30, 0, 0);         // 垂直回転(X軸を軸とする回転)は、30度見下ろす回転
-        hRotation = Quaternion.identity;                // 水平回転(Y軸を軸とする回転)は、無回転
-        transform.rotation = hRotation * vRotation;     // 最終的なカメラの回転は、垂直回転してから水平回転する合成回転
-
-        // 位置の初期化
-        // player位置から距離distanceだけ手前に引いた位置を設定します
-        transform.position = player.position - transform.rotation * Vector3.forward * distance;
+        _rotateSpeed = 1;
+        _distance = transform.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.position = player.position - transform.rotation * Vector3.forward * distance;
+
+        //プライヤー位置を追従する
+        transform.position = new Vector3(_player.position.x + _distance.x, transform.position.y, _player.position.z + _distance.z);
+
+        _yaw += Input.GetAxis("Mouse X") * _rotateSpeed; //横回転入力
+        _pitch -= Input.GetAxis("Mouse Y") * _rotateSpeed; //縦回転入力
+
+        _pitch = Mathf.Clamp(_pitch, -80, 60); //縦回転角度制限する
+
+        transform.eulerAngles = new Vector3(_pitch, _yaw, 0.0f); //回転の実行
     }
 }
