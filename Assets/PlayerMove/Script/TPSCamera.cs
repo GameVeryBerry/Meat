@@ -4,36 +4,48 @@ using UnityEngine;
 
 public class TPSCamera : MonoBehaviour
 {
-    // 注視対象プレイヤー
     [SerializeField]
-    private Transform player;
-    // 注視対象プレイヤーからカメラを離す距離
+    Transform _player;
     [SerializeField]
-    private float distance = 15.0f;
-    // カメラの垂直回転(見下ろし回転)
-    [SerializeField]
-    private Quaternion vRotation;
-    // カメラの水平回転  
-    [SerializeField]
-    public Quaternion hRotation;     
-
-
-    // Start is called before the first frame update
-    void Start()
+    float _rotateSpeed;
+    float _rotate;
+    float _yaw;
+    float _pitch;
+    Vector3 _distance;
+    Vector3 _targetPos;
+    Vector3 _cameraPos;
+    private void Start()
     {
-        // 回転の初期化
-        vRotation = Quaternion.Euler(30, 0, 0);         // 垂直回転(X軸を軸とする回転)は、30度見下ろす回転
-        hRotation = Quaternion.identity;                // 水平回転(Y軸を軸とする回転)は、無回転
-        transform.rotation = hRotation * vRotation;     // 最終的なカメラの回転は、垂直回転してから水平回転する合成回転
+        _rotateSpeed = 3;
+        _distance = transform.position;
 
-        // 位置の初期化
-        // player位置から距離distanceだけ手前に引いた位置を設定します
-        transform.position = player.position - transform.rotation * Vector3.forward * distance;
+        _yaw = 0;
+        _pitch = 0;
+
+        Cursor.visible = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.position = player.position - transform.rotation * Vector3.forward * distance;
+        //プライヤー位置を追従する
+        _targetPos = _player.transform.position;
+
+        float pre_yaw = _yaw;
+
+        _yaw   += Input.GetAxis("Mouse X") * _rotateSpeed; //横回転入力
+        _pitch -= Input.GetAxis("Mouse Y") * _rotateSpeed; //縦回転入力
+
+       _pitch = Mathf.Clamp(_pitch, -80, 60); //縦回転角度制限する
+
+        _rotate = _yaw - pre_yaw;
+       
+
+        transform.RotateAround(_targetPos, Vector3.up, _rotate);
+        transform.LookAt(_targetPos, Vector3.up);
+
+        transform.position = _targetPos + (transform.position - _targetPos).normalized * _distance.magnitude;
+
+
+   
     }
 }
