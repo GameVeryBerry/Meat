@@ -11,17 +11,15 @@ public class PlayerController : MonoBehaviour
     // 移動方向
     private Vector3 _velocity;
     // 移動速度                           
-    [SerializeField]
     private const float MOVE_SPEED = 0.3f;
-    [SerializeField]
     public const float RESEET_SPEED = 0.0f;
-    [SerializeField]
     public const float JUMP_POWER = 3.0f;
     //リジットボディー
     [SerializeField]
     private Rigidbody _rb;
     [SerializeField]
     public Transform _camera;
+
     private bool _isGround;
     //ステート
     public StateProcessor StateProcessor = new StateProcessor();           //プロセッサー
@@ -33,7 +31,8 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        _rb = GameObject.Find("Player").GetComponent<Rigidbody>();
+        _camera = GameObject.Find("Main Camera").GetComponent<Transform>();
         //DefaultState
         StateProcessor.State = Stand;
         PlayerStateID._execDelegate = Default;

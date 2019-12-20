@@ -16,19 +16,17 @@ public class TPSCamera : MonoBehaviour
     Vector3 _cameraPos;
     private void Start()
     {
-        _rotateSpeed = 1;
+        _rotateSpeed = 3;
         _distance = transform.position;
 
         _yaw = 0;
         _pitch = 0;
-        Debug.Log(_distance);
-       
+        _player = GameObject.Find("Player").GetComponent<Transform>();
+        Cursor.visible = false;
     }
 
     void Update()
     {
-       // Debug.Log(_targetPos);
-        Debug.Log(transform.position);
         //プライヤー位置を追従する
         _targetPos = _player.transform.position;
 
@@ -47,5 +45,7 @@ public class TPSCamera : MonoBehaviour
 
         transform.position = _targetPos + (transform.position - _targetPos).normalized * _distance.magnitude;
 
+
+   
     }
 }
