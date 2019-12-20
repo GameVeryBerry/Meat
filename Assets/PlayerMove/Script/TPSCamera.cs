@@ -21,7 +21,7 @@ public class TPSCamera : MonoBehaviour
 
         _yaw = 0;
         _pitch = 0;
-
+        _player = GameObject.Find("Player").GetComponent<Transform>();
         Cursor.visible = false;
     }
 
