@@ -16,19 +16,17 @@ public class TPSCamera : MonoBehaviour
     Vector3 _cameraPos;
     private void Start()
     {
-        _rotateSpeed = 1;
+        _rotateSpeed = 3;
         _distance = transform.position;
 
         _yaw = 0;
         _pitch = 0;
-        Debug.Log(_distance);
-       
+
+        Cursor.visible = false;
     }
 
     void Update()
     {
-       // Debug.Log(_targetPos);
-        Debug.Log(transform.position);
         //プライヤー位置を追従する
         _targetPos = _player.transform.position;
 
@@ -40,13 +38,14 @@ public class TPSCamera : MonoBehaviour
        _pitch = Mathf.Clamp(_pitch, -80, 60); //縦回転角度制限する
 
         _rotate = _yaw - pre_yaw;
+       
 
         transform.RotateAround(_targetPos, Vector3.up, _rotate);
         transform.LookAt(_targetPos, Vector3.up);
-//        transform.position = _targetPos + (transform.position - _targetPos).normalized * _distance.magnitude;
-        transform.position = _targetPos + (transform.position - _targetPos + _distance).normalized * _distance.magnitude;
 
-       
-        
+        transform.position = _targetPos + (transform.position - _targetPos).normalized * _distance.magnitude;
+
+
+   
     }
 }
