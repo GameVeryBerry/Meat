@@ -11,17 +11,15 @@ public class PlayerController : MonoBehaviour
     // 移動方向
     private Vector3 _velocity;
     // 移動速度                           
-    [SerializeField]
     private const float MOVE_SPEED = 0.3f;
-    [SerializeField]
     public const float RESEET_SPEED = 0.0f;
-    [SerializeField]
-    public const float JUMP_POWER = 3.0f;
+    public const float JUMP_POWER = 10.0f;
     //リジットボディー
     [SerializeField]
     private Rigidbody _rb;
     [SerializeField]
     public Transform _camera;
+
     private bool _isGround;
     //ステート
     public StateProcessor StateProcessor = new StateProcessor();           //プロセッサー
@@ -33,7 +31,9 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        Physics.gravity = new Vector3(0, -9.81f, 0);
+        _rb = GameObject.Find("Player").GetComponent<Rigidbody>();
+        _camera = GameObject.Find("Main Camera").GetComponent<Transform>();
         //DefaultState
         StateProcessor.State = Stand;
         PlayerStateID._execDelegate = Default;
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+       
         //ステートの値が変更されたら実行処理を行う
         if (StateProcessor.State == null)
         {
@@ -92,7 +92,9 @@ public class PlayerController : MonoBehaviour
             {
                 _velocity = Vector3.zero;
             }
-            if (Input.GetKey(KeyCode.Space))
+
+
+            if (Input.GetKey(KeyCode.Space) && _isGround)
             {
                 _velocity.y = JUMP_POWER;
                 StateProcessor.State = Jump;
@@ -125,7 +127,7 @@ public class PlayerController : MonoBehaviour
             StateProcessor.State = Stand;
         }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && _isGround)
         {
             _velocity.y = JUMP_POWER;
             StateProcessor.State = Jump;
@@ -137,10 +139,11 @@ public class PlayerController : MonoBehaviour
         Debug.Log("StateがJumpingに状態遷移しました。");
         if (_isGround == false)
         {
-            _velocity.y += Physics.gravity.y * Time.deltaTime;
+            _velocity.y  = Physics.gravity.y * Time.deltaTime;
         }
         else
         {
+            Debug.Log("a");
             _velocity = Vector3.zero;
             StateProcessor.State = Stand;
         }
