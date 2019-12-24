@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKey(KeyCode.Space) && _isGround)
             {
-                _rb.velocity = new Vector3(0, JUMP_POWER, 0);
+                _velocity.y = JUMP_POWER;
                 StateProcessor.State = Jump;
             }
         }
@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space) && _isGround)
         {
-            _rb.velocity = new Vector3(0, JUMP_POWER,0);
+            _velocity.y = JUMP_POWER;
             StateProcessor.State = Jump;
         }
 
@@ -139,9 +139,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("StateがJumpingに状態遷移しました。");
         if (_isGround == false)
         {
-            float gravity;
-            gravity = Physics.gravity.y * Time.deltaTime;
-            _rb.velocity = new Vector3(0, gravity, 0);
+            _velocity.y  = Physics.gravity.y * Time.deltaTime;
         }
         else
         {
