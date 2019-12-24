@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     // 移動速度                           
     private const float MOVE_SPEED = 0.3f;
     public const float RESEET_SPEED = 0.0f;
-    public const float JUMP_POWER = 3.0f;
+    public const float JUMP_POWER = 10.0f;
     //リジットボディー
     [SerializeField]
     private Rigidbody _rb;
@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Physics.gravity = new Vector3(0, -9.81f, 0);
         _rb = GameObject.Find("Player").GetComponent<Rigidbody>();
         _camera = GameObject.Find("Main Camera").GetComponent<Transform>();
         //DefaultState
@@ -45,7 +46,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+       
         //ステートの値が変更されたら実行処理を行う
         if (StateProcessor.State == null)
         {
@@ -91,9 +92,11 @@ public class PlayerController : MonoBehaviour
             {
                 _velocity = Vector3.zero;
             }
-            if (Input.GetKey(KeyCode.Space))
+
+
+            if (Input.GetKey(KeyCode.Space) && _isGround)
             {
-                _velocity.y = JUMP_POWER;
+                _rb.velocity = new Vector3(0, JUMP_POWER, 0);
                 StateProcessor.State = Jump;
             }
         }
@@ -124,9 +127,9 @@ public class PlayerController : MonoBehaviour
             StateProcessor.State = Stand;
         }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && _isGround)
         {
-            _velocity.y = JUMP_POWER;
+            _rb.velocity = new Vector3(0, JUMP_POWER,0);
             StateProcessor.State = Jump;
         }
 
@@ -136,10 +139,13 @@ public class PlayerController : MonoBehaviour
         Debug.Log("StateがJumpingに状態遷移しました。");
         if (_isGround == false)
         {
-            _velocity.y += Physics.gravity.y * Time.deltaTime;
+            float gravity;
+            gravity = Physics.gravity.y * Time.deltaTime;
+            _rb.velocity = new Vector3(0, gravity, 0);
         }
         else
         {
+            Debug.Log("a");
             _velocity = Vector3.zero;
             StateProcessor.State = Stand;
         }
