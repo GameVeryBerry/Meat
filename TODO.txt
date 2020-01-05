@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Instantiate(cloneObject、new Vector3(),Quaternion.identity);
 こーたにおんは回転を固定
 空に入れる、Generator
@@ -11,4 +12,19 @@ cloneObject.transform.parent=this.transform;
 
 プログラム上でプレハブを指定する
 GameObject moveLern=(GameObject)Resources.Load("Prefab/MapLernMovePrefab");
+=======
+Instantiate(cloneObject、new Vector3(),Quaternion.identity);
+こーたにおんは回転を固定
+空に入れる、Generator
+元のオブジェクトはpublicで宣言する
+Startで一回だけ呼ぶかフレームごとにUpdata
+
+// ジェネレーターを親に指定
+cloneObject.transform.parent=this.transform;
+// UnityでGeneratorをMapLernの本体につける
+// もしくは最初に出る位置を新しく作ってそことジェネレーターをくっつける
+
+プログラム上でプレハブを指定する
+GameObject moveLern=(GameObject)Resources.Load("Prefab/MapLernMovePrefab");
+>>>>>>> Develop
 GameObject clone=Instantiate(moveLern,this.transform.position);
