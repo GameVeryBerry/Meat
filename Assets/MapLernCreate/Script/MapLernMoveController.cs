@@ -5,7 +5,8 @@
 public class MapLernMoveController : MonoBehaviour
 {
     // 目標地点のオブジェクト
-    public GameObject goalPoint;
+    [SerializeField]
+    private GameObject goalPoint;
 
     Vector3 move_Position;
     Vector3 toGoPoint;
@@ -15,7 +16,6 @@ public class MapLernMoveController : MonoBehaviour
     void Start()
     {
         move_Position = this.transform.position;    //移動させたいオブジェクトの座標
-        //toGoPoint = goalPoint.transform.position;   //目的地に設置したオブジェクトの座標
     }
 
     void Update()
@@ -24,10 +24,12 @@ public class MapLernMoveController : MonoBehaviour
         this.transform.position = move_Position;
     }
 
-    public void Init(GameObject gool)
+    public void Init(GameObject goal)
     {
-        toGoPoint = gool.transform.position;   //目的地に設置したオブジェクトの座標
+        toGoPoint = goal.transform.position;   //目的地に設置したオブジェクトの座標
     }
+
+
 
     private void OnTriggerEnter(Collider other)
     {

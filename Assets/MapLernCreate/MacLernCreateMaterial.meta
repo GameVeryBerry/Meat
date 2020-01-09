@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 fileFormatVersion: 2
 guid: 469dc7b86d8fdac49b5805de5146b132
 folderAsset: yes
@@ -6,3 +7,30 @@ DefaultImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+=======
+<<<<<<< HEAD
+<<<<<<< CameraCreate
+=======
+>>>>>>> Develop
+fileFormatVersion: 2
+guid: 65771e5642e963a42ad4518bdec7101f
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+<<<<<<< HEAD
+=======
+fileFormatVersion: 2
+guid: 65771e5642e963a42ad4518bdec7101f
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+>>>>>>> test
+=======
+>>>>>>> Develop
+>>>>>>> Develop
