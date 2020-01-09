@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 <<<<<<< CameraCreate
+=======
+>>>>>>> Develop
 fileFormatVersion: 2
 guid: 65771e5642e963a42ad4518bdec7101f
 folderAsset: yes
@@ -7,6 +10,7 @@ DefaultImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+<<<<<<< HEAD
 =======
 fileFormatVersion: 2
 guid: 65771e5642e963a42ad4518bdec7101f
@@ -17,3 +21,5 @@ DefaultImporter:
   assetBundleName: 
   assetBundleVariant: 
 >>>>>>> test
+=======
+>>>>>>> Develop

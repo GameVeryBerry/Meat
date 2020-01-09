@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 <<<<<<< CameraCreate
+=======
+>>>>>>> Develop
 Meat Escape Memo
 <規則>
 配置するオブジェクトは全てprefab
@@ -10,6 +13,7 @@ Meat Escape Memo
 ブランチ名　　キャメル
 script名　　　オブジェクト名の後ろに作る
 class名　　　 関数名はキャメル型
+<<<<<<< HEAD
 =======
 Meat Escape Memo
 <規則>
@@ -23,4 +27,6 @@ Meat Escape Memo
 script名　　　オブジェクト名の後ろに作る
 class名　　　 関数名はキャメル型
 >>>>>>> test
+=======
+>>>>>>> Develop
 定数名　　　  全て大文字　間に＿を入れる
