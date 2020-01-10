@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     // 移動速度                           
     private const float MOVE_SPEED = 0.3f;
     public const float RESEET_SPEED = 0.0f;
-    public const float JUMP_POWER = 5.0f;
+    public const float JUMP_POWER = 10.0f;
     //リジットボディー
     [SerializeField]
     private Rigidbody _rb;
